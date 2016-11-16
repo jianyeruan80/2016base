@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Jianye Ruan</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />    
+ <script type="text/javascript" charset="utf-8" src="util.js"></script>
+  
+ <body>
+	<div id="addHandler">addHandler</div><pre>00002,window.tools.addHandler(id, "click", function () { alert("OK"); }); OR tools.addHandler(window, "online", function () { alert("Online"); });</pre>
+	<hr/>	
+	<pre>00003,console.log(window.tools.toFixed(2.4,2));</pre><hr/>
+	<pre>00004,window.tools.stopPropagation();</pre><hr/>
+
+	<a href="http://google.com" onclick="test2()">preventDefault</a><pre>00005,window.tools.preventDefault();</pre><hr/>
+</body>
+	
+</html>
+ <script>
+ //window.tools.test();
+ var id=document.getElementById("addHandler");
+ window.tools.addHandler(id, "click", function () { alert("Online"); }); 
+ console.log(window.tools.toFixed(2.4,2));
+ function test2(){
+ 	alert("OK");
+ 	window.tools.preventDefault();
+ }
+ </script> 

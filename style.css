@@ -1,0 +1,8 @@
+html,body{
+font-family: Georgia, "Times New Roman", "Microsoft YaHei", "Î¢ÈíÑÅºÚ", STXihei, "»ªÎÄÏ¸ºÚ", serif;
+height:100%;
+font-size:1rem;
+}
+
+.clearfix:after {content:"."; display:block; height:0; visibility:hidden; clear:both; }
+.clearfix { *zoom:1; }

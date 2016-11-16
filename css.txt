@@ -1,0 +1,35 @@
+1,伪元素实现换行:
+.inline-element::after{
+    content: "\A";
+    white-space: pre;
+}
+2,伪元素读取内容
+content:attr(data-msg);
+3,disabled
+.disabled { pointer-events: none; }
+4, 元系所有样式
+<input type="button" id="button" class="button" value="点击我，显示我" />
+<p id="detail"></p>
+JS代码：
+var oButton = document.getElementById("button"),
+    oDetail = document.getElementById("detail");
+
+if (oButton && oDetail) {
+    oButton.onclick = function() {
+        var oStyle = this.currentStyle? this.currentStyle : window.getComputedStyle(this, false);
+        
+        var key, html = '本按钮CSS属性名和属性值依次为('+ !!this.currentStyle +')：
+';
+        if (typeof oStyle === "object") {
+            for (key in oStyle) {
+                if (/^[a-z]/i.test(key) && oStyle[key]) {
+                    html = html + '' + key + ":" + oStyle[key] + '';
+                }
+            }
+        } else {
+            html += '无法获取CSS样式！';
+        }
+        
+        oDetail.innerHTML = html;
+    };
+}

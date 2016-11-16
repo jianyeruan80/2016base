@@ -1,0 +1,214 @@
+// 防抖动：防抖技术即是可以把多个顺序地调用合并成一次，也就是在一定时间内，规定事件被触发的次数。
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+};
+ 
+var myEfficientFn = debounce(function() {
+    // 滚动中的真正的操作
+}, 250);
+ 
+// 绑定监听
+window.addEventListener('resize', myEfficientFn);
+========================================================================
+
+
+// 节流函数：只允许一个函数在 X 毫秒内执行一次，只有当上一次函数执行后过了你规定的时间间隔，才能进行下一次该函数的调用。
+function throttle(func, wait, mustRun) {
+    var timeout,
+        startTime = new Date();
+ 
+    return function() {
+        var context = this,
+            args = arguments,
+            curTime = new Date();
+ 
+        clearTimeout(timeout);
+        // 如果达到了规定的触发时间间隔，触发 handler
+        if(curTime - startTime >= mustRun){
+            func.apply(context,args);
+            startTime = curTime;
+        // 没达到触发间隔，重新设定定时器
+        }else{
+            timeout = setTimeout(func, wait);
+        }
+    };
+};
+// 实际想绑定在 scroll 事件上的 handler
+function realFunc(){
+    console.log("Success");
+}
+// 采用了节流函数
+window.addEventListener('scroll',throttle(realFunc,500,1000));
+========================================================================
+
+rAF：16.7ms 触发一次 handler，降低了可控性，但是提升了性能和精确度。
+var ticking = false; // rAF 触发锁
+ 
+function onScroll(){
+  if(!ticking) {
+    requestAnimationFrame(realFunc);
+    ticking = true;
+  }
+}
+ 
+function realFunc(){
+    // do something...
+    console.log("Success");
+    ticking = false;
+}
+// 滚动事件监听
+window.addEventListener('scroll', onScroll, false);
+===================================================================
+
+   var checkURL = function () {
+    var list = [ //106
+            '&Aacute',
+            '&aacute',
+            '&Acirc',
+            '&acirc',
+            '&acute',
+            '&AElig',
+            '&aelig',
+            '&Agrave',
+            '&agrave',
+            '&AMP',
+            '&amp',
+            '&Aring',
+            '&aring',
+            '&Atilde',
+            '&atilde',
+            '&Auml',
+            '&auml',
+            '&brvbar',
+            '&Ccedil',
+            '&ccedil',
+            '&cedil',
+            '&cent',
+            '&COPY',
+            '&copy',
+            '&curren',
+            '&deg',
+            '&divide',
+            '&Eacute',
+            '&eacute',
+            '&Ecirc',
+            '&ecirc',
+            '&Egrave',
+            '&egrave',
+            '&ETH',
+            '&eth',
+            '&Euml',
+            '&euml',
+            '&frac12',
+            '&frac14',
+            '&frac34',
+            '&GT',
+            '&gt',
+            '&Iacute',
+            '&iacute',
+            '&Icirc',
+            '&icirc',
+            '&iexcl',
+            '&Igrave',
+            '&igrave',
+            '&iquest',
+            '&Iuml',
+            '&iuml',
+            '&laquo',
+            '&LT',
+            '&lt',
+            '&macr',
+            '&micro',
+            '&middot',
+            '&nbsp',
+            '&not',
+            '&Ntilde',
+            '&ntilde',
+            '&Oacute',
+            '&oacute',
+            '&Ocirc',
+            '&ocirc',
+            '&Ograve',
+            '&ograve',
+            '&ordf',
+            '&ordm',
+            '&Oslash',
+            '&oslash',
+            '&Otilde',
+            '&otilde',
+            '&Ouml',
+            '&ouml',
+            '&para',
+            '&plusmn',
+            '&pound',
+            '&QUOT',
+            '&quot',
+            '&raquo',
+            '&REG',
+            '&reg',
+            '&sect',
+            '&shy',
+            '&sup1',
+            '&sup2',
+            '&sup3',
+            '&szlig',
+            '&THORN',
+            '&thorn',
+            '&times',
+            '&Uacute',
+            '&uacute',
+            '&Ucirc',
+            '&ucirc',
+            '&Ugrave',
+            '&ugrave',
+            '&uml',
+            '&Uuml',
+            '&uuml',
+            '&Yacute',
+            '&yacute',
+            '&yen',
+            '&yuml'
+        ];
+        
+    return function (url) {
+        var l = list;
+        var i = l.length;
+        var matchIndex;
+        var current;
+        var nextchar;
+        var errors = [];
+        for (; i--;){
+            matchIndex = url.indexOf(l[i]);
+            current = l[i];
+            if(matchIndex > -1){
+                if((current === '&amp' || current === '&AMP') && url.charAt(matchIndex + 4) === ';'){
+                    //如果是 &amp; 或 &AMP; 我们就认为是故意要输出 & ,比如是一个调用fixURL方法修正过的URL.里面的& 会被我们替换为 amp;
+                    //所以,我们要跳过它,去检查后面.
+                    continue;
+                }
+                nextchar = url.charAt(matchIndex + current.length);
+                if(!/[a-zA-Z0-9]/.test(nextchar)){
+                    //此处我们只要发现任意一个 ,如 &reg后面紧随字符不在 a-z,A-Z,0-9范围内.就算有问题.
+                    //这样处理实际和标准的细节以及浏览器实现有细微差异. 但是本着任何浏览器来跑case,都能发现潜在威胁的原则.和实现复杂度的考虑.
+                    // 我们姑且粗暴的这样处理了. 似乎还不错.
+                     
+                    errors.push(current + nextchar);
+                }
+            }
+        }
+        if(errors.length){
+            throw Error('contains : \n' + errors.join('\n'));
+        }
+    };
+}();

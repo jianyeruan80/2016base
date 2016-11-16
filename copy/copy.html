@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>copy</title>
+  <script src="clipboard.min.js" />
+ </head>
+ <body>
+      <div id="div-target">test</div>
+    <button class="btn" data-clipboard-action="copy" data-clipboard-target="#div-target">Copy</button>
+
+ </body>
+</html>
+<script>
+	var clipboard = new Clipboard('.btn');
+   clipboard.on('success', function(e) {
+        console.log(e);
+    });
+    clipboard.on('error', function(e) {
+        console.log(e);
+    });
+
+</script>

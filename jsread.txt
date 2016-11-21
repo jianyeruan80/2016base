@@ -1,3 +1,34 @@
+  var COUNT = 0, demo = document.getElementById('demo');
+    function testFn() {demo.innerHTML += 'testFN 被调用了 ' + ++COUNT + '次<br>';}
+
+    var throttle = function (fn, delay, atleast) {
+        var timer = null;
+        var previous = null;
+
+        return function () {
+            var now = +new Date();
+
+            if ( !previous ) previous = now;
+            if ( atleast && now - previous > atleast ) {
+                fn();
+                // 重置上一次开始时间为本次结束时间
+                previous = now;
+                clearTimeout(timer);
+            } else {
+                clearTimeout(timer);
+                timer = setTimeout(function() {
+                    fn();
+                    previous = null;
+                }, delay);
+            }
+        }
+    };
+    window.onscroll = throttle(testFn, 200);
+
+
+
+
+
 // 防抖动：防抖技术即是可以把多个顺序地调用合并成一次，也就是在一定时间内，规定事件被触发的次数。
 function debounce(func, wait, immediate) {
     var timeout;
@@ -16,12 +47,34 @@ function debounce(func, wait, immediate) {
  
 var myEfficientFn = debounce(function() {
     // 滚动中的真正的操作
-}, 250);
+}, 250,true);
  
 // 绑定监听
 window.addEventListener('resize', myEfficientFn);
 ========================================================================
 
+    var  throttle = function (fn, delay, atleast) {
+        var timer = null;
+        var previous = null;
+
+        return function () {
+            var now = +new Date();
+
+            if ( !previous ) previous = now;
+            if ( atleast && now - previous > atleast ) {
+                fn();
+               
+                previous = now;
+                clearTimeout(timer);
+            } else {
+                clearTimeout(timer);
+                timer = setTimeout(function() {
+                    fn();
+                    previous = null;
+                }, delay);
+            }
+        }
+    };
 
 // 节流函数：只允许一个函数在 X 毫秒内执行一次，只有当上一次函数执行后过了你规定的时间间隔，才能进行下一次该函数的调用。
 function throttle(func, wait, mustRun) {

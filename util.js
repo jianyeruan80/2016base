@@ -2,7 +2,16 @@
 var tools;
 var obj = {
     test:function(){alert("Test")},
-    //tools.addHandler("id",click,function(){alert("OK")})                   
+    //tools.addHandler("id",click,function(){alert("OK")})
+    $$:function(id,type){//0=id,1=class,2=div
+       if(!type){
+        return document.getElementById(id);
+       }else if(type==0){
+        return document.querySelector(id);//"div.user-panel.main input[name=login]"
+       }else{
+        document.querySelectorAll(id)
+       }
+    },                  
     addHandler: function (element, type, handler) {   
              if(element.addEventListener) { 
                 element.addEventListener(type, handler, false); 
@@ -13,9 +22,9 @@ var obj = {
  //tools.toFixed(100,2)       
 	 toFixed:function(num, s) {                        //00003
           var tempnum = num.toFixed(s+4);
-	 	  return Number(Math.round(tempnum+'e'+s)+'e-'+s);
+	 	       return Number(Math.round(tempnum+'e'+s)+'e-'+s);
           },
-   stopPropagation:function(event){                //00004
+  stopPropagation:function(event){                //00004
 		var e = event || window.event;
 		if (e && e.stopPropagation) e.stopPropagation(); 
 		else e.cancelBubble = true; 

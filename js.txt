@@ -1,6 +1,9 @@
+pointer-events:none
 // 防抖动：防抖技术即是可以把多个顺序地调用合并成一次，也就是在一定时间内，规定事件被触发的次数。
 function debounce(func, wait, immediate) {
     var timeout;
+    var immediate = immediate | 0; 
+    var wait = wait | 0;
     return function() {
         var context = this, args = arguments;
         var later = function() {
@@ -212,3 +215,49 @@ window.addEventListener('scroll', onScroll, false);
         }
     };
 }();
+
+
+//将arguments转化为数组
+function args() {
+    console.log([].slice.call(arguments, 0));
+}
+args(2, 5, 8); // [2, 5, 8]
+function add() {
+    if(!arguments.callee.count) {
+        arguments.callee.count = 0;
+    }
+    return arguments.callee.count++;
+}
+
+var arr = [2, 3, 45, 12, 8];
+console.log(Math.max.apply(null, arr))
+'index.jsp?page='+encodeURIComponent('/page/home.jsp');  
+console.log((0.1 + 0.2).toFixed(2));
+=============
+var supportsPointerEvents = (function(){
+    //上面验证浏览器支持pointer-events属性代码
+})();
+
+var oArea = document.getElementById("testArea"),
+     oButton = document.getElementById("testButton");
+
+oArea.onkeyup = function() {
+    var length = this.innerHTML.length;
+    if (length == 0 || length > 140) {
+        oButton.className = "test_button test_button_disabled";
+        oButton.removeAttribute("href");	
+    } else {
+        oButton.className = "test_button";
+        oButton.href = "javascript:";		
+    }
+};
+
+oButton.onclick = function() {
+    //如果支持CSS3 pointer-events，CSS自动判定是否执行点击事件，脚本这边可以无顾忌执行弹出
+    //如果不支持CSS3 pointer-events
+    //通过按钮状态判定是否弹出
+    if (supportsPointerEvents || (!supportsPointerEvents && this.href)) {
+        alert("发送成功");
+    }
+    return false;
+};

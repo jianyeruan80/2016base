@@ -1,0 +1,20 @@
+
+<input type="checkbox" id="nav01"/>
+<label for="nav01">
+</label>
+<div class="nav-item">
+               <ul>
+                  <li>动车</li>
+                  <li>违章</li>
+                  <li>机票</li>
+                  </ul>
+          </div>
++ 代表选择元素紧邻的元素
+input[type='checkbox']:checked + label .choice-box svg { 
+  transform: rotate(-90deg);
+  transition: all 0.3s;
+}
+~ 代表选择元素同级的元素
+input[type='checkbox']:checked ~ .nav-item {
+  display: none;
+}

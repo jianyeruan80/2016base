@@ -47,7 +47,7 @@ console.log(tools.regExpMutiReplace(originArray,replaceJson,contentStr));
 */
  regExpMutiReplace:function(originArray,replaceJson,contentStr){
       var reg =new RegExp("("+originArray.join(")|(").replace(/([\[\]])/g,"\\$1")+")","g");
-      contentStr.replace(reg, function(word){
+     return contentStr.replace(reg, function(word){
   　　var rep=replaceJson[word];
       return rep ? rep : word;
    });
@@ -58,3 +58,4 @@ window.tools = obj;
 })(document);
 //¡¡e.target || e.srcElement»ñÈ¡µ±Ç°Êµ¼Ê´¥·¢ÊÂ¼þ½Úµã£¬e.currentTarget»ñÈ¡»ñÈ¡µ±Ç°¼àÌý½Úµã¡£e.srcElement
 //e.type  event.target.style.backgroundColor = "red";
+//https://rawgit.com/jianyeruan80/2016base/master/util.js

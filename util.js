@@ -46,13 +46,13 @@ replaceJson={"[可爱]":"<img src='keai.gif' title='可爱'/>","惊讶":"<img sr
 console.log(tools.regExpMutiReplace(originArray,replaceJson,contentStr));
 */
  regExpMutiReplace:function(originArray,replaceJson,contentStr){
-      var reg =new RegExp("("+originArray.join(")|(").replace(/([\[\]])/g,"\\$1")+")","g");
-     return contentStr.replace(reg, function(word){
-  　　var rep=replaceJson[word];
-      return rep ? rep : word;
-   });
+    var reg =new RegExp("("+originArray.join(")|(").replace(/([\[\]])/g,"\\$1")+")","g");
+       return contentStr.replace(reg, function(word){
+    　　var rep=replaceJson[word];
+        return rep ? rep : word;
+     })}
  }		
-}
+
 
 window.tools = obj;
 })(document);

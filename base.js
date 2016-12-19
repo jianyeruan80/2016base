@@ -10,14 +10,50 @@
     doc.addEventListener("DOMContentLoaded", fn, false);
  
 }(document, window));
+document.write(
+'protocol-->'+location.protocol+'<br/>',
+'host-->'+location.host+'<br/>',
+'hostname-->'+location.hostname+'<br/>',
+'href-->'+location.href+'<br/>',
+'pathname-->'+location.pathname+'<br/>',
+'search-->'+location.search+'<br/>',
+'hash-->'+location.hash+'<br/>'
+)
 
+protocol-->http:
+host-->www.cnpiont.com:8090
+hostname-->www.cnpiont.com
+href-->http://www.cnpiont.com:8090/index.html?user=like&pwd=123#title
+pathname-->/index.html
+search-->?user=like&pwd=123
+hash-->#title
+
+1ï¼Œhistory.go(0) 
+2ï¼Œlocation.reload() 
+3ï¼Œlocation=location 
+4ï¼Œlocation.assign(location) 
+5ï¼Œlocation.replace(location) 
 ///getComputedStyle(box).margin
-/*
-HTTP³£¼û×´Ì¬Âë
-200 / 204£¨³É¹¦£¬µ«ÊÇÎŞĞè·µ»ØÖµ£©
-301£¨ÓÀ¾ÃÖØ¶¨Ïò£© / 302£¨ÁÙÊ±ÖØ¶¨Ïò£© / 304 
-400 £¨bad request£©/ 403 £¨forbidden£©/ 404
-500 / 502(Íø¹ØÎÊÌâ) / 503£¨·şÎñÆ÷·±Ã¦£© / 504(³¬Ê±)
+/* å®šä¹‰ */
+@font-face {
+    font-family: 'MicrosoftYaHei';
+    src: url('MicrosoftYaHei.eot'); /* IE9 Compat Modes */
+    src: url('MicrosoftYaHei.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+             url('MicrosoftYaHei.woff') format('woff'), /* Modern Browsers */
+             url('MicrosoftYaHei.ttf')  format('truetype'), /* Safari, Android, iOS */
+             url('MicrosoftYaHei.svg#MicrosoftYaHei') format('svg'); /* Legacy iOS */
+   }
+
+/* ä½¿ç”¨ */
+body{
+  font-family: "MicrosoftYaHei";
+}
+/*http://demo.menusifupos.com:8080/kpos/emenu/#/index
+HTTPÂ³Â£Â¼Ã»Ã—Â´ÃŒÂ¬Ã‚Ã«
+200 / 204Â£Â¨Â³Ã‰Â¹Â¦Â£Â¬ÂµÂ«ÃŠÃ‡ÃÃÃÃ¨Â·ÂµÂ»Ã˜Ã–ÂµÂ£Â©
+301Â£Â¨Ã“Ã€Â¾ÃƒÃ–Ã˜Â¶Â¨ÃÃ²Â£Â© / 302Â£Â¨ÃÃ™ÃŠÂ±Ã–Ã˜Â¶Â¨ÃÃ²Â£Â© / 304 
+400 Â£Â¨bad requestÂ£Â©/ 403 Â£Â¨forbiddenÂ£Â©/ 404
+500 / 502(ÃÃ¸Â¹Ã˜ÃÃŠÃŒÃ¢) / 503Â£Â¨Â·Ã¾ÃÃ±Ã†Ã·Â·Â±ÃƒÂ¦Â£Â© / 504(Â³Â¬ÃŠÂ±)
 var mydiv = document.getElementById('mydiv');
 if(mydiv.currentStyle) {
       var width = mydiv.currentStyle['width'];
@@ -26,7 +62,7 @@ if(mydiv.currentStyle) {
       var width = window.getComputedStyle(mydiv , null)['width'];
       alert('firefox:' + width);
 }
-¡¡element.currentStyle["marginLeft"]
+Â¡Â¡element.currentStyle["marginLeft"]
 
-¡¡¡¡window.getComputedStyle(element, null)["marginLeft"]
+Â¡Â¡Â¡Â¡window.getComputedStyle(element, null)["marginLeft"]
 */

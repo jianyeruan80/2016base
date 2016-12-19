@@ -1,3 +1,24 @@
+javascript中String的fromCharCode()方法
+前几天遇到一个bug,后端的模板引擎在输出形如:
+
+<div title="111 aaa">内容</div>
+这样的内容时,无法输出' '空格,所以只能用'&nbsp;'来代替:
+
+<div title="111&nbsp;aaa">内容</div>
+然后前端使用空格来切分title值:
+
+var arr1 = title.split(' ');
+然后得到的arr1是这样的:
+
+['111 aaa']
+我把' '换成'&nbsp;' 或者直接 &nbsp; 得到的结果都是一样的.
+
+查看字符串中的第4个字符,获取它的ascii码:
+
+console.log(hTitle.charCodeAt(3));  //160
+然后搜了一下,发现String对象中有个方法:fromCharCode,也就是通过ascii码来获取字符串.所以,这个问题可以这样处理:
+
+var arr1 = title.split(String.fromCharCode('160'));    //['111','aaa']
 pointer-events:none
 // 防抖动：防抖技术即是可以把多个顺序地调用合并成一次，也就是在一定时间内，规定事件被触发的次数。
 function debounce(func, wait, immediate) {

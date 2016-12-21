@@ -84,8 +84,7 @@ var obj = {
         　　var rep=replaceJson[word];
             return rep ? rep : word;
          })},
-      //window.addEventListener('resize', debounce(fun,200,true));     
-     debounce:function(func, wait, immediate) {
+       debounce:function(func, wait, immediate) {//window.addEventListener('resize', debounce(fun,200,true));     
           var timeout;
           var immediate = immediate | 0; 
           var wait = wait | 0;
@@ -101,8 +100,7 @@ var obj = {
               if (callNow) func.apply(context, args);
           }
     },
-    //window.addEventListener('scroll',throttle(realFunc,500,1000));
-     throttle:function(func, wait, mustRun) {
+  throttle:function(func, wait, mustRun) {    //window.addEventListener('scroll',throttle(realFunc,500,1000));
               var timeout,
               startTime = new Date();
               return function() {
@@ -122,8 +120,16 @@ var obj = {
          var className=className || disabled;
          e.classList.toggle(className);
      },
-     //getUrltoJson("http://www.baid.com?id=22&b5b=33","b5b")
-     getUrltoJson:function(url,name) {
+     getInnerHTML:function(html){
+		//var html = "<p><a href='http://www.cnblogs.com/rubylouvre/'>Ruby Louvre</a>by <em>司徒正美</em></p>"; 
+		//var result = /(\d+)-(\w+)/.exec('12-ab'); //'aa11AA'.replace(/([a-z]+)(\d+)([A-Z]+)/g, '$1')) 提取
+       //'aa11AA'.replace(/(\d+)/g, '$`'); //"aaaaAA"
+	   //'aa11AA'.replace(/(\d+)/g, "$'"); //"aaAAAA"
+       //'aa11AA'.replace(/(\d+)/g, '$$'); //"aa$AA"
+		var text = html.replace(/<(?:.|\s)*?>/g, "");
+		return text;
+	 },
+     getUrltoJson:function(url,name) {      //getUrltoJson("http://www.baid.com?id=22&b5b=33","b5b")
         var result = {};
         var reg = new RegExp('([\\?|&])(.+?)=([^&?]*)', 'ig');
         var arr = reg.exec(url.toLowerCase());
@@ -197,6 +203,34 @@ uuid2:function () {
     var uuid = s.join("");
     return uuid;
 },
+showTime:function(e){
+    var _ = ['00','01','02','03','04','05','06','07','08','09'], d = new Date(), h = d.getHours(), m = d.getMinutes(), s =  d.getSeconds();
+	e.textContent= [_[h]||h,_[m]||m,_[s]||s].join(":");
+   window.setTimeout(function(){
+	    this.showTime(e);
+	},1000);
+
+	
+},
+getintveral:function(e,date)//	//setInterval(getintveral,1000,"2017-01-01");
+{
+var d1=new Date();
+var d2=date;
+var t1=d1.getTime();
+var t2=d2.getTime();
+var t3=parseInt(parseInt(t2-t1)/1000);
+var d=parseInt(t3/86400);
+var h=parseInt((t3-(d*86400))/3600);
+var m=parseInt((t3-(d*86400)-(h*3600))/60);
+var s=parseInt(t3-(d*86400)-(h*3600)-(m*60));
+var _ = ['00','01','02','03','04','05','06','07','08','09'];
+e.innerHTML=d+"day "+h+":"+(_[m] || m)+":"+(s||_[s]);
+},
+change:function(oldStr,newStr){
+	var red="/"+oldStr+"/g";
+	return str.replace(eval(reg),newStr	);
+},
+
 }
 window.tools = obj;
 })(document);
